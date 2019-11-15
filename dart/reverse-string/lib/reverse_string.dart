@@ -1,0 +1,1 @@
+String reverse(String toReverse) => toReverse.split('').reversed.join();

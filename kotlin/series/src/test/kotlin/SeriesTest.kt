@@ -76,6 +76,5 @@ class SeriesTest {
     @Test(expected = IllegalArgumentException::class)
     fun emptySeriesIsInvalid() {
         Series.slices(1, "")
-        Series.slices(1, "")
     }
 }

@@ -1,10 +1,12 @@
 class Squares(n: Int) {
 
-    private val naturalNumbers = 0..n
+    private val naturalNumbers = 1..n
 
-    fun sumOfSquares(): Int = naturalNumbers.sumBy { it * it }
+    fun sumOfSquares(): Int = naturalNumbers.sumBy { it.square() }
 
-    fun squareOfSum(): Int = naturalNumbers.sum().let { it * it }
+    fun squareOfSum(): Int = naturalNumbers.sum().square()
 
     fun difference(): Int = squareOfSum() - sumOfSquares()
+
+    private fun Int.square(): Int = this * this
 }

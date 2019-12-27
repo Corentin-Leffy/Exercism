@@ -1,24 +1,30 @@
+import 'dart:math';
+
 class Darts {
-  static const int OUTER_CIRCLE_RADIUS = 10;
-  static const int MIDDLE_CIRCLE_RADIUS = 5;
-  static const int INNER_CIRCLE_RADIUS = 1;
+  static final Circle OuterCircle = Circle(10, 1);
+  static final Circle MiddleCircle = Circle(5, 5);
+  static final Circle InnerCircle = Circle(1, 10);
 
-  static const int OUTER_CIRCLE_SCORE = 1;
-  static const int MIDDLE_CIRCLE_SCORE = 5;
-  static const int INNER_CIRCLE_SCORE = 10;
+  static final scores = {InnerCircle, MiddleCircle, OuterCircle};
 
-  static final scores = {
-    INNER_CIRCLE_RADIUS: INNER_CIRCLE_SCORE,
-    MIDDLE_CIRCLE_RADIUS: MIDDLE_CIRCLE_SCORE,
-    OUTER_CIRCLE_RADIUS: OUTER_CIRCLE_SCORE,
-  };
+  static final defaultValue = () => Circle(0, 0);
 
-  static final defaultValue = () => MapEntry<int, int>(0, 0);
+  int score(num x, num y) => scores
+      .firstWhere((circle) => circle.contains(x, y), orElse: defaultValue)
+      .score;
+}
 
-  int score(num x, num y) => scores.entries
-      .firstWhere((entry) => isInCircle(x, y, entry.key), orElse: defaultValue)
-      .value;
+class Circle {
+  int _radius;
+  int score;
 
-  bool isInCircle(num x, num y, int radius) =>
-      x * x + y * y - radius * radius <= 0;
+  static final center = Point(0, 0);
+
+  Circle(int radius, int score) {
+    this._radius = radius;
+    this.score = score;
+
+  }
+
+  bool contains(num x, num y) => Point(x, y).distanceTo(center) <= _radius;
 }

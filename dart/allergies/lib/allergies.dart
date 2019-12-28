@@ -1,5 +1,5 @@
 class Allergies {
-  Map<String, int> allergens = {
+  static const allergens = const {
     "eggs": 1,
     "peanuts": 2,
     "shellfish": 4,
@@ -10,7 +10,8 @@ class Allergies {
     "cats": 128
   };
 
-  bool allergicTo(String aliment, int score) {}
+  bool allergicTo(String aliment, int score) => score & allergens[aliment] != 0;
 
-  List<String> list(int score) {}
+  List<String> list(int score) =>
+      allergens.keys.where((aliment) => allergicTo(aliment, score)).toList();
 }

@@ -1,19 +1,6 @@
 class RnaTranscription {
-  String toRna(String dna) =>
-      dna.split("").map((nucleotide) => transcribe(nucleotide)).join("");
+  final dnaToRna = {"G": "C", "C": "G", "T": "A", "A": "U"};
 
-  String transcribe(String nucleotide) {
-    switch (nucleotide) {
-      case "G":
-        return "C";
-      case "C":
-        return "G";
-      case "T":
-        return "A";
-      case "A":
-        return "U";
-      default:
-        throw ArgumentError("Unknown nucleotide : $nucleotide");
-    }
-  }
+  String toRna(String dna) =>
+      dna.split("").map((nucleotide) => dnaToRna[nucleotide]).join("");
 }

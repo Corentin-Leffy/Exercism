@@ -1,6 +1,3 @@
-class Gigasecond {
-  static const GIGA_SECOND = 1000000000;
+const GIGA_SECOND = Duration(seconds: 1000000000);
 
-  DateTime add(DateTime birthDate) =>
-      birthDate.add(Duration(seconds: GIGA_SECOND));
-}
+DateTime add(DateTime birthDate) => birthDate.add(GIGA_SECOND);

@@ -3,13 +3,10 @@ class Hamming {
     noStrandMustBeEmpty(original, replicate);
     mustBeOfEqualLength(original, replicate);
 
-    var distance = 0;
-
-    for (var index = 0; index < original.length; index++) {
-      distance += original[index] != replicate[index] ? 1 : 0;
-    }
-
-    return distance;
+    return original
+        .mapIndexed()
+        .where((entry) => entry.value != replicate[entry.key])
+        .length;
   }
 
   void noStrandMustBeEmpty(String original, String replicate) {
@@ -24,4 +21,11 @@ class Hamming {
       throw ArgumentError('left and right strands must be of equal length');
     }
   }
+}
+
+extension on String {
+  Iterable<MapEntry<int, String>> mapIndexed() =>
+      split("")
+          .asMap()
+          .entries;
 }

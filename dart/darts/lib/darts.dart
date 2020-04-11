@@ -1,30 +1,26 @@
 import 'dart:math';
 
 class Darts {
-  static final Circle OuterCircle = Circle(10, 1);
-  static final Circle MiddleCircle = Circle(5, 5);
-  static final Circle InnerCircle = Circle(1, 10);
+  static final circles = {Circle.inner(), Circle.middle(), Circle.outer()};
 
-  static final scores = {InnerCircle, MiddleCircle, OuterCircle};
-
-  static final defaultValue = () => Circle(0, 0);
-
-  int score(num x, num y) => scores
-      .firstWhere((circle) => circle.contains(x, y), orElse: defaultValue)
+  int score(num x, num y) => circles
+      .firstWhere((circle) => circle.contains(x, y), orElse: () => Circle())
       .score;
 }
 
 class Circle {
-  int _radius;
-  int score;
+  final int radius;
+  final int score;
 
-  static final center = Point(0, 0);
+  static final _center = Point(0, 0);
 
-  Circle(int radius, int score) {
-    this._radius = radius;
-    this.score = score;
+  factory Circle.inner() => Circle(1, 10);
 
-  }
+  factory Circle.middle() => Circle(5, 5);
 
-  bool contains(num x, num y) => Point(x, y).distanceTo(center) <= _radius;
+  factory Circle.outer() => Circle(10, 1);
+
+  Circle([this.radius = 0, this.score = 0]);
+
+  bool contains(num x, num y) => Point(x, y).distanceTo(_center) <= radius;
 }

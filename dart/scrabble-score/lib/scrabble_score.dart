@@ -1,4 +1,4 @@
-Map<List<String>, int> scrabble = {
+const scrabble = {
   ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"]: 1,
   ["D", "G"]: 2,
   ["B", "C", "M", "P"]: 3,
@@ -11,7 +11,7 @@ Map<List<String>, int> scrabble = {
 num score(String word) => word
     .toUpperCase()
     .split('')
-    .map((letter) => valueForLetter(letter))
+    .map(valueForLetter)
     .fold(0, (total, value) => total += value);
 
 num valueForLetter(String letter) =>

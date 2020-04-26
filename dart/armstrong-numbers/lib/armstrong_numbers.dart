@@ -1,11 +1,11 @@
 import 'dart:math';
 
 class ArmstrongNumbers {
-  bool isArmstrongNumber(int number) {
-    String numberAsString = number.toString();
-    return number == numberAsString
-          .split('')
-          .map((n) => pow(int.parse(n), numberAsString.length))
-          .reduce((sum, n) => sum += n);
-  }
+  bool isArmstrongNumber(int number) => _armstrong(number) == number;
+
+  num _armstrong(int number) => '$number'
+      .split('')
+      .map(int.parse)
+      .map((n) => pow(n, '$number'.length))
+      .reduce((sum, n) => sum + n);
 }

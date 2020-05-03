@@ -5,14 +5,10 @@ class WordCount {
       .split(invalidCharacters)
       .where((word) => word.isNotEmpty)
       .map((word) => word.toLowerCase())
-      .groupBy((word) => word)
-      .map((word, values) => MapEntry(word, values.length));
-}
+      .fold(<String, int>{},
+          (map, word) => map..update(word, _inc, ifAbsent: _default));
 
-extension GroupBy<S> on Iterable<S> {
-  Map<T, List<S>> groupBy<T>(T Function(S) key) {
-    final Map<T, List<S>> map = {};
-    forEach((element) => (map[key(element)] ??= []).add(element));
-    return map;
-  }
+  int _default() => 1;
+
+  int _inc(int i) => ++i;
 }
